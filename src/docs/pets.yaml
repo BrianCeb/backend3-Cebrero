@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: Adoptme API - Pets
+  version: "1.0.0"
+  description: Endpoints del módulo Pets.
+
+tags:
+  - name: Pets
+    description: Gestión de mascotas
+
+paths:
+  /api/pets:
+    get:
+      summary: Obtener todas las mascotas
+      tags: [Pets]
+      responses:
+        "200":
+          description: Lista de mascotas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Pet'
+    post:
+      summary: Crear una mascota
+      tags: [Pets]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/CreatePet'
+      responses:
+        "200":
+          description: Mascota creada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  payload: { $ref: '#/components/schemas/Pet' }
+
+  /api/pets/withimage:
+    post:
+      summary: Crear una mascota con imagen
+      tags: [Pets]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name: { type: string, example: Firulais }
+                specie: { type: string, example: dog }
+                birthDate: { type: string, format: date, example: 2020-01-01 }
+                image: { type: string, format: binary }
+      responses:
+        "200":
+          description: Mascota creada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  payload: { $ref: '#/components/schemas/Pet' }
+
+  /api/pets/{pid}:
+    put:
+      summary: Actualizar una mascota
+      tags: [Pets]
+      parameters:
+        - $ref: '#/components/parameters/Pid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/UpdatePet'
+      responses:
+        "200":
+          description: Mascota actualizada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: pet updated }
+    delete:
+      summary: Eliminar una mascota
+      tags: [Pets]
+      parameters:
+        - $ref: '#/components/parameters/Pid'
+      responses:
+        "200":
+          description: Mascota eliminada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: pet deleted }
+
+components:
+  parameters:
+    Pid:
+      name: pid
+      in: path
+      required: true
+      description: ObjectId de la mascota
+      schema:
+        type: string
+        example: 64f8f7a0a0a0a0a0a0b0c2d3
+  schemas:
+    Pet:
+      type: object
+      properties:
+        _id: { type: string, example: 64f8f7a0a0a0a0a0a0b0c2d3 }
+        name: { type: string, example: Firulais }
+        specie: { type: string, example: dog }
+        birthDate: { type: string, format: date, example: 2020-01-01T00:00:00.000Z }
+        adopted: { type: boolean, example: false }
+        owner: { type: string, nullable: true, example: 64f8f7a0a0a0a0a0a0a0a0a0 }
+        image: { type: string, example: /public/img/firulais.jpg }
+      required: [name, specie]
+  requestBodies:
+    CreatePet:
+      type: object
+      properties:
+        name: { type: string, example: Firulais }
+        specie: { type: string, example: dog }
+        birthDate: { type: string, format: date, example: 2020-01-01 }
+      required: [name, specie, birthDate]
+    UpdatePet:
+      type: object
+      properties:
+        name: { type: string, example: Max }
+        specie: { type: string, example: cat }
+        birthDate: { type: string, format: date, example: 2021-06-15 }
+        adopted: { type: boolean, example: true }
+        owner: { type: string, example: 64f8f7a0a0a0a0a0a0a0a0a0 }
+        image: { type: string, example: /public/img/max.jpg }

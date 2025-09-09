@@ -49,7 +49,7 @@ const swaggerOptions = {
         openapi: '3.0.1',
         info: {
             title: 'Adoptme API',
-            description: 'Documentación del módulo Users',
+            description: 'Documentación de los módulos Users, Pets, Adoptions y Sessions',
             version: '1.0.0'
         }
     },

@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: Adoptme API - Adoptions
+  version: "1.0.0"
+  description: Endpoints del módulo Adoptions.
+
+tags:
+  - name: Adoptions
+    description: Gestión de adopciones
+
+paths:
+  /api/adoptions:
+    get:
+      summary: Obtener todas las adopciones
+      tags: [Adoptions]
+      responses:
+        "200":
+          description: Lista de adopciones
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  payload:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Adoption'
+
+  /api/adoptions/{aid}:
+    get:
+      summary: Obtener una adopción por id
+      tags: [Adoptions]
+      parameters:
+        - $ref: '#/components/parameters/Aid'
+      responses:
+        "200":
+          description: Adopción encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  payload: { $ref: '#/components/schemas/Adoption' }
+        "404":
+          description: Adopción no encontrada
+
+  /api/adoptions/{uid}/{pid}:
+    post:
+      summary: Crear una adopción
+      tags: [Adoptions]
+      parameters:
+        - $ref: '#/components/parameters/Uid'
+        - $ref: '#/components/parameters/Pid'
+      responses:
+        "200":
+          description: Mascota adoptada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: success }
+                  message: { type: string, example: Pet adopted }
+        "404":
+          description: Usuario o mascota no encontrada
+        "400":
+          description: Mascota ya adoptada
+
+components:
+  parameters:
+    Aid:
+      name: aid
+      in: path
+      required: true
+      description: ObjectId de la adopción
+      schema:
+        type: string
+        example: 64f8f7a0a0a0a0a0a0a0a0b1
+    Uid:
+      name: uid
+      in: path
+      required: true
+      description: ObjectId del usuario
+      schema:
+        type: string
+        example: 64f8f7a0a0a0a0a0a0a0a0a0
+    Pid:
+      name: pid
+      in: path
+      required: true
+      description: ObjectId de la mascota
+      schema:
+        type: string
+        example: 64f8f7a0a0a0a0a0a0b0c2d3
+  schemas:
+    Adoption:
+      type: object
+      properties:
+        _id: { type: string, example: 64f8f7a0a0a0a0a0a0a0b1c2 }
+        owner: { type: string, example: 64f8f7a0a0a0a0a0a0a0a0a0 }
+        pet: { type: string, example: 64f8f7a0a0a0a0a0a0b0c2d3 }
+      required: [owner, pet]

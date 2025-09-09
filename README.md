@@ -20,8 +20,9 @@ Módulo documentado: **Users**
 Para ejecutar los tests (incluye `adoption.router.js`):
 
 ```bash
+npm install
 npm test
-
+```
 
 Los tests verifican:
 - Crear, obtener y listar adopciones.
@@ -29,11 +30,19 @@ Los tests verifican:
 
 ## Docker
 
-https://hub.docker.com/r/brale23/backend3-cebrero  
-Tags: `latest` · `1.0.0`
-docker run -p 8080:8080 --env-file .env brale23/backend3-cebrero:1.0.0
----
+Imagen disponible en Docker Hub: https://hub.docker.com/r/brale23/backend3-cebrero (tags `latest` y `1.0.0`).
 
+Para construir la imagen localmente:
+
+```bash
+docker build -t brale23/backend3-cebrero:1.0.0 .
+```
+
+Para ejecutar la imagen:
+
+```bash
+docker run -p 8080:8080 --env-file .env brale23/backend3-cebrero:1.0.0
+```
 ##  Variables de entorno 
 
 Ejemplo de configuración:
