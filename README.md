@@ -12,19 +12,19 @@ Se documenta con **Swagger**, tiene **tests funcionales** implementados con Moch
 La documentación de la API se encuentra en:  
 [http://localhost:8080/apidocs](http://localhost:8080/apidocs)
 
-Módulo documentado: **Users**
+Módulos documentados:  Users,Pets, Adoptions y Sessions.
 
 ---
 
 ##  Tests
-Para ejecutar los tests (incluye `adoption.router.js`):
+Supertest adoption.router.js
 
 ```bash
 npm install
 npm test
 ```
 
-Los tests verifican:
+Los test comprueban :
 - Crear, obtener y listar adopciones.
 - Casos de error: usuario inexistente, mascota inexistente, mascota ya adoptada, id inválido
 
@@ -51,3 +51,7 @@ PORT=8080
 MONGO_URL=mongodb://host.docker.internal:27017/backend3
 JWT_SECRET=supersecret
 NODE_ENV=production
+
+
+
+© 2025 Brian Cebrero
