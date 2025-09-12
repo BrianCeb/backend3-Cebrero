@@ -10,7 +10,7 @@ Se documenta con **Swagger**, tiene **tests funcionales** implementados con Moch
 
 ## Swagger
 La documentación de la API se encuentra en:  
-[http://localhost:8080/apidocs](http://localhost:8080/apidocs)
+[https://backend3-cebrero-production.up.railway.app/apidocs/](https://backend3-cebrero-production.up.railway.app/apidocs/)
 
 Módulos documentados:  Users,Pets, Adoptions y Sessions.
 
