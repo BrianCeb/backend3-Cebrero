@@ -52,6 +52,6 @@ MONGO_URL=mongodb://host.docker.internal:27017/backend3
 JWT_SECRET=supersecret
 NODE_ENV=production
 
-
+```
 
 © 2025 Brian Cebrero
