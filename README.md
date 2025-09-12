@@ -48,7 +48,7 @@ docker run -p 8080:8080 --env-file .env brale23/backend3-cebrero:1.0.0
 Ejemplo de configuración:
 ```env
 PORT=8080
-MONGO_URL=mongodb://host.docker.internal:27017/backend3
+MONGO_URL=mongodb+srv://appuser:coder2025@gimnasiodb.bannv0d.mongodb.net/backend3?retryWrites=true&w=majority&appName=gimnasioDB
 JWT_SECRET=supersecret
 NODE_ENV=production
 
